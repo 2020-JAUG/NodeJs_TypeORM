@@ -1,5 +1,5 @@
-import {BaseRouter} from "../router/router";
-import {UserController} from "./controllers/user.controller";
+import {BaseRouter} from "./base.router";
+import {UserController} from "../controllers/user.controller";
 import { Request, Response } from 'express';
 
 export class UserRouter extends BaseRouter<UserController, void> {

@@ -1,6 +1,6 @@
-import { BaseEntity } from "../../config/base.entity";
+import { BaseEntity } from "../config/base.entity";
 import { Column, Entity, OneToOne } from "typeorm";
-import { RoleType } from "../dto/user.dto";
+import { RoleType } from "./dto/user.dto";
 //import { CustomerEntity } from "../../customer/entities/customer.entity";
 
 @Entity({ name: "users" })

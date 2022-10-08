@@ -3,7 +3,6 @@
 .vscode/*
 anotaciones.txt
 src/migrations
-src/config/data.source.ts
 .env
 .idea
 .vscode

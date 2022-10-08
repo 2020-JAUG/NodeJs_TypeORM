@@ -4,7 +4,13 @@
   "description": "Basic concepts",
   "main": "./dist/server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "tsc && node dist/server.js",
+    "start:dev": "tsc && concurrently \"tsc -w\" \"nodemon dist/server.js\"",
+    "start:prod": "export NODE_ENV=production && npm start",
+    "typeorm": "typeorm-ts-node-esm -d ./src/config/data.source.ts",
+    "m:gen": "npm run typeorm migration:generate",
+    "m:run": "npm run typeorm migration:run",
+    "m:revert": "npm run typeorm migration:revert"
   },
   "author": "Alejandro Urbina",
   "license": "MIT",

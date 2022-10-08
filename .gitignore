@@ -1,0 +1,12 @@
+/dist
+/node_modules
+.vscode/*
+anotaciones.txt
+src/migrations
+src/config/data.source.ts
+.env
+.idea
+.vscode
+.production.env
+/src/mysql/*
+.DS_Store

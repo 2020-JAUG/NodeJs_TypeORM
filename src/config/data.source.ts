@@ -18,8 +18,8 @@ const Config: DataSourceOptions = {
     database: process.env.MYSQL_DATABASE || database.database,
     entities: [__dirname + "/../**/*.entity{.ts,.js}"], //Para leer las entidades del proyecto y buscar en las carpetas los archivos que tengan la extension .ts .js
     migrations: [__dirname + "/../migrations/*{.ts,.js}"],
-    synchronize: true,
-    migrationsRun: false,
+    synchronize: false,
+    migrationsRun: true,
     logging: false,
     namingStrategy: new SnakeNamingStrategy(), //Para almacenar en la base de datos los nombres en snake_case
 };

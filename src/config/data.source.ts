@@ -16,9 +16,10 @@ const Config: DataSourceOptions = {
     username: process.env.MYSQL_USER || database.user,
     password: process.env.MYSQL_PASSWORD || database.password,
     database: process.env.MYSQL_DATABASE || database.database,
+    extra: { connectionLimit: 10},
     entities: [__dirname + "/../**/*.entity{.ts,.js}"], //Para leer las entidades del proyecto y buscar en las carpetas los archivos que tengan la extension .ts .js
     migrations: [__dirname + "/../migrations/*{.ts,.js}"],
-    synchronize: false,
+    synchronize: true,
     migrationsRun: true,
     logging: false,
     namingStrategy: new SnakeNamingStrategy(), //Para almacenar en la base de datos los nombres en snake_case

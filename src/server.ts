@@ -5,6 +5,10 @@ import cors from 'cors';
 import {DataSource} from "typeorm";
 import {ConfigServer} from "./config/config";
 import {UserRouter} from "./router/user.router";
+import {ProductRouter} from "./router/product.router";
+import {CustomerRouter} from "./router/customer.router";
+import {CategoryRouter} from "./router/category.router";
+import {PurchaseRouter} from "./router/purchase.router";
 
 export class Server extends ConfigServer {
 
@@ -28,7 +32,11 @@ export class Server extends ConfigServer {
 
     routers(): express.Router[] {
         return [
-            new UserRouter().router
+            new UserRouter().router,
+            new ProductRouter().router,
+            new CustomerRouter().router,
+            new CategoryRouter().router,
+            new PurchaseRouter().router
         ]
     }
 

@@ -3,6 +3,8 @@
   "version": "0.0.1",
   "description": "Basic concepts",
   "main": "./dist/server.js",
+  "types": "./dist/server.d.js",
+  "type": "commonjs",
   "scripts": {
     "start": "tsc && node dist/server.js",
     "start:dev": "tsc && concurrently \"tsc -w\" \"nodemon dist/server.js\"",

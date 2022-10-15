@@ -21,12 +21,6 @@ export class UserDTO extends BaseDTO {
     password: string;
 
     @IsNotEmpty()
-    city: string;
-
-    @IsNotEmpty()
-    province: string;
-
-    @IsNotEmpty()
     role: RoleType;
 }
 

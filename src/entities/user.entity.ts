@@ -6,6 +6,9 @@ import {CustomerEntity} from "./customer.entity";
 @Entity({ name: "users" })
 export class UserEntity extends BaseEntity {
 
+    @OneToOne(() => CustomerEntity, customer => customer.user)
+    customer: CustomerEntity;
+
     @Column()
     name: string;
 
@@ -21,15 +24,6 @@ export class UserEntity extends BaseEntity {
     @Column({ select: false })
     password: string;
 
-    @Column()
-    city: string;
-
-    @Column()
-    province: string;
-
     @Column({ type: "enum", enum: RoleType, nullable: false })
     role: RoleType;
-
-    @OneToOne(() => CustomerEntity, customer => customer.user)
-    customer: CustomerEntity;
 }

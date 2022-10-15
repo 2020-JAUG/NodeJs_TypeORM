@@ -1,7 +1,7 @@
-import { IsNotEmpty } from "class-validator";
+import {IsNotEmpty, IsOptional} from "class-validator";
 import { BaseDTO } from "../../config/base.dto";
-import {Column} from "typeorm";
 import {CustomerEntity} from "../customer.entity";
+import {ProductEntity} from "../product.entity";
 
 export class PurchaseDTO extends BaseDTO {
     @IsNotEmpty()
@@ -19,8 +19,8 @@ export class PurchaseDTO extends BaseDTO {
     @IsNotEmpty()
     total_price: number;
 
-    // @IsNotEmpty()
-    // purchase_products: ProductEntity[];
+    @IsOptional()
+    products!: ProductEntity[];
 }
 
 export enum StatusPurchase {

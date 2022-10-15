@@ -9,7 +9,7 @@ export class ProductService extends BaseService<ProductEntity> {
     protected repository = AppDataSource.getRepository(ProductEntity);
 
     constructor(
-        private readonly purchase: ProductService = new ProductService()
+        //private readonly product: ProductService = new ProductService()
     ) {
         super(ProductEntity);
     }
@@ -18,17 +18,16 @@ export class ProductService extends BaseService<ProductEntity> {
         return (await this.execRepository).save(body);
     }
 
-    async createPurchaseProduct(attributes: ProductDto): Promise<ProductEntity> {
+    //async createPurchaseProduct(attributes: ProductDto): Promise<ProductEntity> {
 
-        const entity = Object.assign({}, new ProductEntity(), attributes);
+        //const entity = Object.assign({}, new ProductEntity(), attributes);
 
         //const entity = (await this.execRepository).create(attributes);
 
         //const find_product = await this.repository.findOneBy(entity.product?.id);
 
-        return this.repository.save(entity);
-
-    }
+        //return this.repository.save(entity);
+    //}
 
     async findAllProducts(): Promise<ProductEntity[]> {
         return (await this.execRepository).find();

@@ -9,6 +9,7 @@ import {ProductRouter} from "./router/product.router";
 import {CustomerRouter} from "./router/customer.router";
 import {CategoryRouter} from "./router/category.router";
 import {PurchaseRouter} from "./router/purchase.router";
+import {PurchaseProductRouter} from "./router/purchaseProduct.route";
 
 export class Server extends ConfigServer {
 
@@ -36,7 +37,8 @@ export class Server extends ConfigServer {
             new ProductRouter().router,
             new CustomerRouter().router,
             new CategoryRouter().router,
-            new PurchaseRouter().router
+            new PurchaseRouter().router,
+            new PurchaseProductRouter().router
         ]
     }
 

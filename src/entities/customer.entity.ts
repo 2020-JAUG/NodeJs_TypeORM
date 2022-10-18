@@ -11,8 +11,8 @@ export class CustomerEntity extends BaseEntity {
     @JoinColumn({ name: 'user_id' })
     user: UserEntity;
 
-    @OneToMany(() => AddressEntity, address => address.customer )
-    addresses: AddressEntity[];
+    // @OneToMany(() => AddressEntity, address => address.customer )
+    // addresses: AddressEntity[];
 
     @OneToMany(() => PurchaseEntity, purchase => purchase.customer)
     purchases: PurchaseEntity[];

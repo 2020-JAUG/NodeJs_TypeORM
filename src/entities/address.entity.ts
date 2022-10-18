@@ -5,9 +5,9 @@ import {CustomerEntity} from "./customer.entity";
 @Entity({ name: "addresses"})
 export class AddressEntity extends BaseEntity {
 
-    @ManyToOne(() => CustomerEntity, customer => customer.addresses)
-    @JoinColumn({ name: 'customer_id'})
-    customer: CustomerEntity;
+    // @ManyToOne(() => CustomerEntity, customer => customer.addresses)
+    // @JoinColumn({ name: 'customer_id'})
+    // customer: CustomerEntity;
 
     @Column()
     street_name: string;

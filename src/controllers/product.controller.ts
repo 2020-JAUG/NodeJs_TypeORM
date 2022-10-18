@@ -19,14 +19,14 @@ export class ProductController {
         }
     }
 
-    async createPurchaseProduct(req: Request, res: Response) {
+/*    async createPurchaseProduct(req: Request, res: Response) {
         try {
             const data = await this.productService.createProduct(req.body);
             return this.httpResponse.Ok(res, data);
         } catch ({message}) {
             return this.httpResponse.InternalServerError(res, message)
         }
-    }
+    }*/
 
     async getProducts(req: Request, res: Response) {
         try {

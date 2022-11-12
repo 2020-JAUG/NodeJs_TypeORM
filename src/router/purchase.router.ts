@@ -1,6 +1,6 @@
-import {Request, Response} from "express";
-import {PurchaseController} from "../controllers/purchase.controller.js";
-import {BaseRouter} from "./base.router.js";
+import { Request, Response } from "express";
+import { PurchaseController } from "../controllers/purchase.controller";
+import { BaseRouter } from "./base.router";
 
 export class PurchaseRouter extends BaseRouter<PurchaseController, void> {
 

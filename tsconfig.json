@@ -36,6 +36,7 @@
     "sourceMap": false,
     "esModuleInterop": true,
     "outDir": "./dist",
+    "rootDir": "./src",
     "allowJs": false,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

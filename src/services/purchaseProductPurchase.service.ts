@@ -1,21 +1,21 @@
-import {DeleteResult, UpdateResult} from "typeorm";
-import {PurchaseProductEntity} from "../entities/purchaseProduct.entity";
-import {BaseService} from "../config/base.service";
-import {ProductService} from "./product.service";
-import {PurchaseProductDTO} from "../entities/dto/purchaseProduct.dto";
+import { DeleteResult, UpdateResult } from "typeorm";
+import { PurchaseProductPurchase } from "../entities/purchase_product_purchase.entity";
+import { BaseService } from "../config/base.service";
+import { ProductService } from "./product.service";
+import { PurchaseProductPurchaseDTO } from "../entities/dto/purchaseProductPurchase.dto";
 
-export class PurchaseProductService extends BaseService<PurchaseProductEntity> {
+export class PurchaseProductPurchaseService extends BaseService<PurchaseProductPurchase> {
 
     constructor(private readonly productService: ProductService = new ProductService()) {
-        super(PurchaseProductEntity);
+        super(PurchaseProductPurchase);
     }
 
-    async createPurchaseProduct(body: PurchaseProductDTO): Promise<PurchaseProductEntity> {
+    async createPurchaseProduct(body: PurchaseProductPurchaseDTO): Promise<PurchaseProductPurchase> {
         console.log(body)
 
         // This line only stores quantity_product that is sent from postman, but does not collect foreign keys.
         //const new_purchase_product = (await this.execRepository).create(body);
-        const new_purchase_product = Object.assign({}, new PurchaseProductEntity(), body);
+        const new_purchase_product = Object.assign({}, new PurchaseProductPurchase(), body);
 
         // if I search for the product by body I find it, but if I try to search through the variable, I do not find it.
         const find_product = await this.productService.findProductById(JSON.stringify(body.product?.id));
@@ -23,7 +23,7 @@ export class PurchaseProductService extends BaseService<PurchaseProductEntity> {
         new_purchase_product.totalPrice = find_product!.price * new_purchase_product.quantityProduct;
         return (await this.execRepository).save(new_purchase_product);
 
-        //const newPurchaseProduct = Object.assign({}, new PurchaseProductEntity(), body);
+        //const newPurchaseProduct = Object.assign({}, new PurchaseProductPurchase(), body);
 
         //const entity = (await this.execRepository).create(attributes);
 
@@ -41,21 +41,21 @@ export class PurchaseProductService extends BaseService<PurchaseProductEntity> {
 
     }
 
-    async findAllPurchaseProducts(): Promise<PurchaseProductEntity[]> {
+    async findAllPurchaseProducts(): Promise<PurchaseProductPurchase[]> {
         return (await this.execRepository).find();
     }
 
-    async findPurchaseProductById(id: string): Promise<PurchaseProductEntity | null> {
-        return (await this.execRepository).findOneBy({id});
+    async findPurchaseProductById(id: string): Promise<PurchaseProductPurchase | null> {
+        return (await this.execRepository).findOneBy({ id });
     }
 
     async deletePurchaseProduct(id: string): Promise<DeleteResult> {
-        return (await this.execRepository).delete({id});
+        return (await this.execRepository).delete({ id });
     }
 
     async updatePurchaseProduct(
         id: string,
-        infoUpdate: PurchaseProductDTO
+        infoUpdate: PurchaseProductPurchaseDTO
     ): Promise<UpdateResult> {
         return (await this.execRepository).update(id, infoUpdate);
     }

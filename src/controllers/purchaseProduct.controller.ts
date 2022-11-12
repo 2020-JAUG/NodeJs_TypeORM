@@ -1,14 +1,14 @@
-import {Request, Response} from "express";
-import {DeleteResult, UpdateResult} from "typeorm";
-import {HttpResponse} from "../helpers/http.response";
-import {PurchaseProductService} from "../services/purchaseProduct.service";
+import { Request, Response } from "express";
+import { DeleteResult, UpdateResult } from "typeorm";
+import { HttpResponse } from "../helpers/http.response";
+import { PurchaseProductPurchaseService } from "../services/purchaseProductPurchase.service";
 
 export class PurchaseProductController {
 
     constructor(
-        private readonly purchaseProductService: PurchaseProductService = new PurchaseProductService(),
+        private readonly purchaseProductService: PurchaseProductPurchaseService = new PurchaseProductPurchaseService(),
         private readonly httpResponse: HttpResponse = new HttpResponse()
-    ) {}
+    ) { }
 
     async createPurchaseProduct(req: Request, res: Response) {
         try {

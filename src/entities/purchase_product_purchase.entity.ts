@@ -4,10 +4,7 @@ import { ProductEntity } from "../entities/product.entity";
 import { PurchaseEntity } from "../entities/purchase.entity";
 
 @Entity({ name: 'purchase_product_purchases' })
-export class PurchaseProductPurchase {
-
-    @PrimaryGeneratedColumn("uuid")
-    id: string;
+export class PurchaseProductPurchase extends BaseEntity {
 
     @Column()
     quantity_product: number;

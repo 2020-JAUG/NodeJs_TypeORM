@@ -1,9 +1,9 @@
 import { IsNotEmpty, IsOptional } from "class-validator";
-import {BaseDTO} from "../../config/base.dto";
-import {PurchaseEntity} from "../purchase.entity";
-import {ProductEntity} from "../product.entity";
+import { BaseDTO } from "../../config/base.dto";
+import { PurchaseEntity } from "../purchase.entity";
+import { ProductEntity } from "../product.entity";
 
-export class PurchaseProductDTO extends BaseDTO {
+export class PurchaseProductPurchaseDTO extends BaseDTO {
     @IsNotEmpty()
     quantityProduct!: number;
 

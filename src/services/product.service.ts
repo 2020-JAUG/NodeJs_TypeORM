@@ -1,8 +1,8 @@
-import {ProductEntity} from "../entities/product.entity";
-import {DeleteResult, UpdateResult} from "typeorm";
-import {BaseService} from "../config/base.service";
-import {AppDataSource} from "../config/data.source";
-import {ProductDto} from "../entities/dto/product.dto";
+import { ProductEntity } from "../entities/product.entity";
+import { DeleteResult, UpdateResult } from "typeorm";
+import { BaseService } from "../config/base.service";
+import { ProductDto } from "../entities/dto/product.dto";
+import { AppDataSource } from "../config/data.source";
 
 export class ProductService extends BaseService<ProductEntity> {
 
@@ -20,13 +20,13 @@ export class ProductService extends BaseService<ProductEntity> {
 
     //async createPurchaseProduct(attributes: ProductDto): Promise<ProductEntity> {
 
-        //const entity = Object.assign({}, new ProductEntity(), attributes);
+    //const entity = Object.assign({}, new ProductEntity(), attributes);
 
-        //const entity = (await this.execRepository).create(attributes);
+    //const entity = (await this.execRepository).create(attributes);
 
-        //const find_product = await this.repository.findOneBy(entity.product?.id);
+    //const find_product = await this.repository.findOneBy(entity.product?.id);
 
-        //return this.repository.save(entity);
+    //return this.repository.save(entity);
     //}
 
     async findAllProducts(): Promise<ProductEntity[]> {
@@ -34,7 +34,7 @@ export class ProductService extends BaseService<ProductEntity> {
     }
 
     async findProductById(id: string): Promise<ProductEntity | null> {
-        return (await this.execRepository).findOneBy({id});
+        return (await this.execRepository).findOneBy({ id });
     }
 
     async updateProduct(id: string, infoUpdate: ProductDto): Promise<UpdateResult> {

@@ -1,7 +1,7 @@
-import {DataSource, DataSourceOptions} from "typeorm";
+import { DataSource, DataSourceOptions } from "typeorm";
 import * as dotenv from 'dotenv';
-import {SnakeNamingStrategy} from "typeorm-naming-strategies";
-import {database} from "../mysql/constants";
+import { SnakeNamingStrategy } from "typeorm-naming-strategies";
+import { database } from "../mysql/constants";
 
 //Lee las variables de entorno
 dotenv.config({
@@ -17,7 +17,8 @@ const Config: DataSourceOptions = {
     password: process.env.MYSQL_PASSWORD || database.password,
     database: process.env.MYSQL_DATABASE || database.database,
     //extra: { connectionLimit: 10},
-    entities: [__dirname + "/../**/*.entity{.ts,.js}"], //Para leer las entidades del proyecto y buscar en las carpetas los archivos que tengan la extension .ts .js
+    //entities: [__dirname + "/../**/*.entity{.ts,.js}"], //Para leer las entidades del proyecto y buscar en las carpetas los archivos que tengan la extension .ts .js
+    entities: [__dirname + "dist/entities/entities/**/*.js"],
     migrations: [__dirname + "/../migrations/*{.ts,.js}"],
     synchronize: true,
     migrationsRun: true,

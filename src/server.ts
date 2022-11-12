@@ -1,15 +1,15 @@
-import 'reflect-metadata';
+
 import express from 'express';
 import morgan from 'morgan';
 import cors from 'cors';
-import {DataSource} from "typeorm";
-import {ConfigServer} from "./config/config";
-import {UserRouter} from "./router/user.router";
-import {ProductRouter} from "./router/product.router";
-import {CustomerRouter} from "./router/customer.router";
-import {CategoryRouter} from "./router/category.router";
-import {PurchaseRouter} from "./router/purchase.router";
-import {PurchaseProductRouter} from "./router/purchaseProduct.route";
+import { DataSource } from "typeorm";
+import { ConfigServer } from "./config/config";
+import { UserRouter } from "./router/user.router";
+import { ProductRouter } from "./router/product.router";
+import { CustomerRouter } from "./router/customer.router";
+import { CategoryRouter } from "./router/category.router";
+import { PurchaseRouter } from "./router/purchase.router";
+import { PurchaseProductRouter } from "./router/purchaseProduct.route";
 
 export class Server extends ConfigServer {
 
@@ -42,7 +42,7 @@ export class Server extends ConfigServer {
         ]
     }
 
-    async dbConnection(): Promise< DataSource | void> {
+    async dbConnection(): Promise<DataSource | void> {
         return this.initConnect
             .then(() => {
                 console.log("Connect Success!");

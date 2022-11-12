@@ -1,4 +1,4 @@
-import {EntityTarget, ObjectLiteral, Repository} from "typeorm";
+import { EntityTarget, ObjectLiteral, Repository } from "typeorm";
 import { BaseEntity } from "./base.entity";
 import { ConfigServer } from "./config";
 
@@ -17,7 +17,7 @@ export class BaseService<T extends BaseEntity> extends ConfigServer { //Es de ti
 
     async initRepository<T extends ObjectLiteral>(entity: EntityTarget<T>): Promise<Repository<T>> {
 
-        const getConnect = await this.initConnect;
+        const getConnect = await this.initConnect; //instancia de initConect
         return getConnect.getRepository(entity); // Aqui le pasamos el repository que recibe la funcion
     }
 }

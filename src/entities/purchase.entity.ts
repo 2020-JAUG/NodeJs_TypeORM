@@ -2,7 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntity } from "../config/base.entity";
 import { CustomerEntity } from "./customer.entity";
 import { IsNotEmpty } from "class-validator";
-import { PurchaseProductPurchase } from "./purchase_product_purchase.entity";
+import { PurchaseProductPurchase } from "./purchaseProductPurchase.entity";
 
 @Entity({ name: "purchases" })
 export class PurchaseEntity extends BaseEntity {

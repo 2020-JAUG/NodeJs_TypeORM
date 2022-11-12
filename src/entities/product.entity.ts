@@ -1,8 +1,9 @@
-import { Column, Entity, JoinColumn, ManyToMany, ManyToOne, OneToMany } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany } from "typeorm";
 import { BaseEntity } from "../config/base.entity";
 import { CategoryEntity } from "./category.entity";
 import { PurchaseEntity } from "./purchase.entity";
 import { PurchaseProductEntity } from "./purchaseProduct.entity";
+import { PurchaseProductPurchase } from "./purchase_product_purchase.entity";
 
 @Entity({ name: "products" })
 export class ProductEntity extends BaseEntity {
@@ -11,9 +12,10 @@ export class ProductEntity extends BaseEntity {
     @JoinColumn({ name: 'category_id' })
     category: CategoryEntity;
 
-    //@ManyToMany(() => PurchaseEntity, purchase => purchase.products)
-    //purchases: PurchaseEntity[];
+    @OneToMany(() => PurchaseProductPurchase, productPurchase => productPurchase.product)
+    products: PurchaseProductPurchase[];
 
+    public purchases: ProductEntity[];
     @OneToMany(() => PurchaseProductEntity, productPurchase => productPurchase.product)
     purchaseProducts: PurchaseProductEntity[];
 

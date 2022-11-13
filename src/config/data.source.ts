@@ -7,7 +7,7 @@ import { database } from "../mysql/constants";
 dotenv.config({
     path: process.env.NODE_ENV !== undefined ? `.${process.env.NODE_ENV.trim()}.env`
         : ".env"
-})
+});
 
 const Config: DataSourceOptions = {
     type: "mysql",
@@ -16,10 +16,10 @@ const Config: DataSourceOptions = {
     username: process.env.MYSQL_USER || database.user,
     password: process.env.MYSQL_PASSWORD || database.password,
     database: process.env.MYSQL_DATABASE || database.database,
-    //extra: { connectionLimit: 10},
+    //extra: { connectionLimit: 10 },
     //entities: [__dirname + "/../**/*.entity{.ts,.js}"], //Para leer las entidades del proyecto y buscar en las carpetas los archivos que tengan la extension .ts .js
-    entities: [__dirname + "dist/entities/entities/**/*.js"],
     migrations: [__dirname + "/../migrations/*{.ts,.js}"],
+    entities: [__dirname + '/../**/*.entity.{js,ts}'],
     synchronize: true,
     migrationsRun: true,
     logging: false,

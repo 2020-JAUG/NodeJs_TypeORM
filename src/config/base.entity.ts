@@ -1,4 +1,4 @@
-import {CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import { CreateDateColumn, DeleteDateColumn, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
 
 export abstract class BaseEntity {
 
@@ -6,11 +6,11 @@ export abstract class BaseEntity {
     id: string;
 
     @CreateDateColumn({ name: "created_at", type: "timestamp" })
-    createdAd: Date;
+    createdAt: Date;
 
     @UpdateDateColumn({ name: "updated_at", type: "timestamp" })
     updatedAt: Date;
 
-    @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp'})
+    @DeleteDateColumn({ name: 'deleted_at', type: 'timestamp' })
     deletedAt: Date;
 }

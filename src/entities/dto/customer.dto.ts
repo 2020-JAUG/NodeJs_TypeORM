@@ -1,14 +1,14 @@
-import {IsNotEmpty} from "class-validator";
-import {BaseDTO} from "../../config/base.dto";
-import {UserEntity} from "../user.entity";
+import { IsNotEmpty } from "class-validator";
+import { BaseDTO } from "../../config/base.dto";
+import { UserEntity } from "../user.entity";
 
-export class CustomerDto extends BaseDTO{
+export class CustomerDto extends BaseDTO {
+
+    //@IsNotEmpty()
+    //address: string;
 
     @IsNotEmpty()
-    address: string;
-
-    @IsNotEmpty()
-    dni: string;
+    identity_card: string;
 
     @IsNotEmpty()
     user: UserEntity;

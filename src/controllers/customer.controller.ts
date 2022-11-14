@@ -1,14 +1,14 @@
-import {Request, Response} from "express";
-import {DeleteResult, UpdateResult} from "typeorm";
-import {CustomerService} from "../services/customer.service";
-import {HttpResponse} from "../helpers/http.response";
+import { Request, Response } from "express";
+import { DeleteResult, UpdateResult } from "typeorm";
+import { CustomerService } from "../services/customer.service";
+import { HttpResponse } from "../helpers/http.response";
 
 export class CustomerController {
 
     constructor(
         private readonly customerService: CustomerService = new CustomerService(),
         private readonly httpResponse: HttpResponse = new HttpResponse()
-    ) {}
+    ) { }
 
     async createCustomer(req: Request, res: Response) {
         try {

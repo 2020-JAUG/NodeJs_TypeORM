@@ -3,6 +3,7 @@ import { PurchaseProductPurchase } from "../entities/purchaseProductPurchase.ent
 import { BaseService } from "../config/base.service";
 import { ProductService } from "./product.service";
 import { PurchaseProductPurchaseDTO } from "../entities/dto/purchaseProductPurchase.dto";
+import { ProductEntity } from "../entities/product.entity";
 
 export class PurchaseProductPurchaseService extends BaseService<PurchaseProductPurchase> {
 
@@ -10,18 +11,43 @@ export class PurchaseProductPurchaseService extends BaseService<PurchaseProductP
         super(PurchaseProductPurchase);
     }
 
-    async createPurchaseProduct(body: PurchaseProductPurchaseDTO): Promise<PurchaseProductPurchase> {
-        console.log(body)
+    async createPurchaseProduct(body: PurchaseProductPurchaseDTO): Promise<PurchaseProductPurchase | null> {
+
+        //const entity = Object.assign({}, new PurchaseProductPurchase(), body);
+        //const entity = Object.assign({}, new ProductEntity(), body);
+
+        //const entity = new ProductEntity();
+        //const entity = (await this.execRepository).create(Object.assign(new PurchaseProductPurchase(), body));
+
+        //const find_product = await this.productService.findProductById(entity.product?.id);
+
+        const createCustomer = new PurchaseProductPurchase()
+        createCustomer.purchase = body.purchase;
+        createCustomer.product = body.product;
+        createCustomer.quantity_product = body.quantityProduct;
+        //entity.total_price = find_product.price * entity.quantity_product;
+
+        //const newProduct = await (await this.execRepository).save(entity)
+
+        //return this.repository.save(entity);
+        //return (await this.execRepository).save(entity);
+
+        //const entity = (await this.execRepository).create(body);
+        const find_product = await this.productService.findProductById(createCustomer.product.id);
+        createCustomer.total_price = find_product!.price * createCustomer.quantity_product;
+
+
+        return (await this.execRepository).save(createCustomer);
 
         // This line only stores quantity_product that is sent from postman, but does not collect foreign keys.
         //const new_purchase_product = (await this.execRepository).create(body);
-        const new_purchase_product = Object.assign({}, new PurchaseProductPurchase(), body);
+        //const new_purchase_product = Object.assign({}, new PurchaseProductPurchase(), body);
 
         // if I search for the product by body I find it, but if I try to search through the variable, I do not find it.
-        const find_product = await this.productService.findProductById(JSON.stringify(body.product?.id));
+        //const find_product = await this.productService.findProductById(JSON.stringify(body.product?.id));
 
-        new_purchase_product.totalPrice = find_product!.price * new_purchase_product.quantityProduct;
-        return (await this.execRepository).save(new_purchase_product);
+        //new_purchase_product.totalPrice = find_product!.price * new_purchase_product.quantityProduct;
+        //return (await this.execRepository).save(new_purchase_product);
 
         //const newPurchaseProduct = Object.assign({}, new PurchaseProductPurchase(), body);
 

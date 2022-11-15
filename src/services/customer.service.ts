@@ -29,17 +29,22 @@ export class CustomerService extends BaseService<CustomerEntity> {
                 role: RoleType.CUSTOMER,
             });
 
-            return (await this.execRepository).save(body);
+            return (await this.execRepository).save(createCustomer);
         }
-        return null;
+        return createCustomer;
     }
 
     async findAllCustomers(): Promise<CustomerEntity[]> {
         return (await this.execRepository).find();
     }
 
-    async findCustomerById(id: string): Promise<CustomerEntity | null> {
-        return (await this.execRepository).findOneBy({ id });
+    async findCustomerById(id: string): Promise<CustomerEntity | any> {
+        return (await this.execRepository)
+            .createQueryBuilder('purchase')
+            .leftJoinAndSelect('purchase.purchases', 'purchases')
+            .leftJoinAndSelect('purchase.user', 'user')
+            .where({ id })
+            .getOne();
     }
 
     async updateCustomer(id: string, infoUpdate: CustomerDto): Promise<UpdateResult> {

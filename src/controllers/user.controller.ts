@@ -1,14 +1,14 @@
-import { Request, Response} from "express";
-import {UserService} from "../services/user.service";
-import {HttpResponse} from "../helpers/http.response";
-import {DeleteResult, UpdateResult} from "typeorm";
+import { Request, Response } from "express";
+import { UserService } from "../services/user.service";
+import { HttpResponse } from "../helpers/http.response";
+import { DeleteResult, UpdateResult } from "typeorm";
 
 export class UserController {
 
     constructor(
         private readonly userService: UserService = new UserService(),
         private readonly httpResponse: HttpResponse = new HttpResponse()
-    ) {}
+    ) { }
 
     async createUser(req: Request, res: Response) {
         try {
@@ -19,7 +19,7 @@ export class UserController {
         }
     }
 
-    async getUsers( req: Request, res: Response ) {
+    async getUsers(req: Request, res: Response) {
         try {
             const data = await this.userService.findAllUser();
             data.length === 0 ? this.httpResponse.NotFound(res, 'Data not found!') : this.httpResponse.Ok(res, data);
@@ -31,7 +31,7 @@ export class UserController {
     async findUserWithRelation(req: Request, res: Response) {
         try {
             const { id } = req.params;
-            const data = await this.userService.findUserById(id);
+            const data = await this.userService.findUserWithRelation(id);
             data === null ? this.httpResponse.NotFound(res, 'User not found!') : this.httpResponse.Ok(res, data);
         } catch (e) {
             return this.httpResponse.InternalServerError(res, e);

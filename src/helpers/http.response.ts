@@ -44,10 +44,9 @@ export class HttpResponse {
         return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
             status: HttpStatus.INTERNAL_SERVER_ERROR,
             message: 'Internal server error',
-            error: {
-                parameters: data.parameters,
-                target: data.driverError.sqlMessage
-            }
-        })
+            error: data
+            //{parameters: data.parameters,
+            //target: data.driverError.sqlMessage }
+        });
     }
 }

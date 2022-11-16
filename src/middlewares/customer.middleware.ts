@@ -13,11 +13,11 @@ export class CustomerMiddleware {
 
     customerValidator(req: Request, res: Response, next: NextFunction) {
 
-        const { address, identity_card, user } = req.body;
+        const { identity_card, user } = req.body;
 
         const validation = new CustomerDto();
 
-        validation.address = address;
+        //validation.address = address;
         validation.identity_card = identity_card;
         validation.user = user;
 

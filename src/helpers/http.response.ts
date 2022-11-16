@@ -1,4 +1,4 @@
-import {Response} from "express";
+import { Response } from "express";
 
 export enum HttpStatus {
     OK = 200,
@@ -42,8 +42,12 @@ export class HttpResponse {
 
     InternalServerError(res: Response, data?: any): Response {
         return res.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
+            status: HttpStatus.INTERNAL_SERVER_ERROR,
             message: 'Internal server error',
-            error: data
+            error: {
+                parameters: data.parameters,
+                target: data.driverError.sqlMessage
+            }
         })
     }
 }

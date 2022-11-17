@@ -1,7 +1,7 @@
 import * as bcrypt from "bcrypt";
 import { BaseService } from "../config/base.service";
 import { UserEntity } from "../entities/user.entity";
-import { UserDTO } from "../entities/dto/user.dto";
+import { RoleType, UserDTO } from "../entities/dto/user.dto";
 import { DeleteResult, UpdateResult } from "typeorm";
 import { AppDataSource } from "../config/data.source";
 
@@ -11,6 +11,15 @@ export class UserService extends BaseService<UserEntity> {
 
     constructor() {
         super(UserEntity);
+    }
+
+    async createUser(body: UserDTO): Promise<UserEntity> {
+
+        const newUser = await this.repository.create(body);
+
+        const hashPassword = await bcrypt.hash(newUser.password, 10);
+        newUser.password = hashPassword;
+        return (await this.execRepository).save(newUser);
     }
 
     async findAllUser(): Promise<UserEntity[]> {
@@ -33,13 +42,22 @@ export class UserService extends BaseService<UserEntity> {
             .getOne();
     }
 
-    async createUser(body: UserDTO): Promise<UserEntity> {
+    async findUserByEmail(email: string): Promise<UserEntity | null> {
+        return await (await this.execRepository)
+            .createQueryBuilder('user')
+            .addSelect('user.password')
+            .where({ email })
+            .getOne();
+    }
 
-        const newUser = await this.repository.create(body);
+    async findUserWithRole(id: string, role: RoleType): Promise<UserEntity | null> {
+        const user = (await this.execRepository)
+            .createQueryBuilder('user')
+            .where({ id })
+            .andWhere({ role })
+            .getOne();
 
-        const hashPassword = await bcrypt.hash(newUser.password, 10);
-        newUser.password = hashPassword;
-        return (await this.execRepository).save(newUser);
+        return user;
     }
 
     async updateUser(id: string, infoUpdate: UserDTO): Promise<UpdateResult> {

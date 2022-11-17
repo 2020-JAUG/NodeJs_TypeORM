@@ -25,6 +25,31 @@ export class UserMiddleware {
         validate(validate).then((err) => {
             if (err.length > 0) {
                 return this.httpResponse.InternalServerError(res, err);
+
+                // throw new ValidateErr(
+
+                //     JSON.stringify(
+                //         err.flatMap((err) => {
+                //             Object.entries(err.constraints).flatMap(([key, value]) => ({
+                //                 msg: value,
+                //                 param: err.property,
+                //                 location: 'body'
+                //             }));
+                //         })
+                //     ),
+                //     400
+                // );
+
+                /**
+                 * class
+                 * 
+                 * export class ValidateErr extends Error {
+                        constructor(public message: string, public statusCode: number) {
+                            super(message);
+                        }
+                        }
+                 */
+
             } else {
                 next();
             }

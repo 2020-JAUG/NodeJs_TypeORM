@@ -1,3 +1,4 @@
+import * as bcrypt from "bcrypt";
 import { BaseService } from "../config/base.service";
 import { UserEntity } from "../entities/user.entity";
 import { UserDTO } from "../entities/dto/user.dto";
@@ -33,7 +34,12 @@ export class UserService extends BaseService<UserEntity> {
     }
 
     async createUser(body: UserDTO): Promise<UserEntity> {
-        return (await this.execRepository).save(body);
+
+        const newUser = await this.repository.create(body);
+
+        const hashPassword = await bcrypt.hash(newUser.password, 10);
+        newUser.password = hashPassword;
+        return (await this.execRepository).save(newUser);
     }
 
     async updateUser(id: string, infoUpdate: UserDTO): Promise<UpdateResult> {

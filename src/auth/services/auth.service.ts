@@ -17,20 +17,29 @@ export class AuthService extends ConfigServer {
     public async validateUser(user_name: string, password: string): Promise<UserEntity | null> {
 
         const userByEmail = await this.userService.findUserByEmail(user_name)
+        const userByUsername = await this.userService.findByUsername(user_name)
 
         if (userByEmail) {
             const isMach = await bcrypt.compare(password, userByEmail.password);
             isMach && userByEmail;
         }
 
+        if (userByUsername) {
+            const isMatch = await bcrypt.compare(password, userByUsername.password);
+            if (isMatch) {
+                return userByUsername;
+            }
+        }
+
         return null;
     }
 
     sing(payload: jwt.JwtPayload, secret: any) {
-        return this.jwtInstance.sing(payload, secret);
+        //return this.jwtInstance.sing(payload, secret);
+        return this.jwtInstance.sign(payload, secret, { expiresIn: "1h" });
     }
 
-    public async generateJwt(user: UserEntity): Promise<{ accesstoken: string; user: UserEntity }> {
+    public async generateJwt(user: UserEntity): Promise<{ accessToken: string; user: UserEntity }> {
 
         const userConsult = await this.userService.findUserWithRole(user.id, user.role);
 
@@ -44,7 +53,7 @@ export class AuthService extends ConfigServer {
         }
 
         return {
-            accesstoken: this.sing(payload, this.getEnvironment("JWT_SECRET")),
+            accessToken: this.sing(payload, this.getEnvironment("JWT_SECRET")),
             user
         }
     }

@@ -17,7 +17,11 @@ export class UserRouter extends BaseRouter<UserController, UserMiddleware> {
         this.router.post('/user/:id', (req: Request, res: Response) => this.controller.findUserById(req, res));
         this.router.post('/user-relationship/:id', (req: Request, res: Response) => this.controller.findUserWithRelation(req, res));
         this.router.put('/update-user/:id', (req: Request, res: Response) => this.controller.updateUSer(req, res));
-        this.router.delete('/delete-user/:id', (req: Request, res: Response) => this.controller.deleteUser(req, res));
+        this.router.delete('/delete-user/:id',
+            this.middleware.passAuth("jwt"),//Aqui indicamos la strategy que queremos usar para poder recibir el token por header y verificar su tiene o no permisos
+            (req, res, next) => [this.middleware.checkAdminRole(req, res, next)],
+            (req: Request, res: Response) => this.controller.deleteUser(req, res)
+        );
 
     }
 }

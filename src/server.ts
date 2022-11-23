@@ -10,6 +10,9 @@ import { CustomerRouter } from "./router/customer.router";
 import { CategoryRouter } from "./router/category.router";
 import { PurchaseRouter } from "./router/purchase.router";
 import { PurchaseProductRouter } from "./router/purchaseProduct.route";
+import { LoginStrategy } from "./auth/strategies/login.strategy";
+import { JwtStrategy } from "./auth/strategies/jwt.strategy";
+import { AuthRouter } from "./auth/auth.router";
 
 export class Server extends ConfigServer {
 
@@ -22,6 +25,7 @@ export class Server extends ConfigServer {
         super();
         this.app.use(express.json());
         this.app.use(express.urlencoded({ extended: true }));
+        this.passportUse();
 
         let ignore = this.dbConnection();
         this.app.use(morgan('dev'));
@@ -38,8 +42,13 @@ export class Server extends ConfigServer {
             new CustomerRouter().router,
             new CategoryRouter().router,
             new PurchaseRouter().router,
-            new PurchaseProductRouter().router
+            new PurchaseProductRouter().router,
+            new AuthRouter().router
         ]
+    }
+
+    passportUse() {
+        return [new LoginStrategy().use, new JwtStrategy().use];
     }
 
     async dbConnection(): Promise<DataSource | void> {

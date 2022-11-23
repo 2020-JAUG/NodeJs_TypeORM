@@ -42,6 +42,14 @@ export class UserService extends BaseService<UserEntity> {
             .getOne();
     }
 
+    async findByUsername(user_name: string): Promise<UserEntity | null> {
+        return (await this.execRepository)
+            .createQueryBuilder("user")
+            .addSelect("user.password")
+            .where({ user_name })
+            .getOne();
+    }
+
     async findUserByEmail(email: string): Promise<UserEntity | null> {
         return await (await this.execRepository)
             .createQueryBuilder('user')

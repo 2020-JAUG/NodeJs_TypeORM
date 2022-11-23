@@ -14,7 +14,7 @@ export class HttpResponse {
             status: HttpStatus.OK,
             message: 'Success!',
             data
-        })
+        });
     }
 
 
@@ -23,14 +23,14 @@ export class HttpResponse {
             status: HttpStatus.NOT_FOUND,
             message: 'Not found!',
             error: data
-        })
+        });
     }
 
     Unauthorized(res: Response, data?: any): Response {
         return res.status(HttpStatus.UNAUTHORIZED).json({
             message: 'Unauthorized!',
             error: data
-        })
+        });
     }
 
     Forbidden(res: Response, data?: any): Response {

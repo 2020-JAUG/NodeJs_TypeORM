@@ -2,12 +2,13 @@ import { validate } from "class-validator";
 import { NextFunction, Request, Response } from "express";
 import { UserDTO } from "../entities/dto/user.dto";
 import { HttpResponse } from "../helpers/http.response";
+import { SharedMiddleware } from "../helpers/middlewares/shared.middleware";
 
-export class UserMiddleware {
+export class UserMiddleware extends SharedMiddleware {
 
-    constructor(
-        private readonly httpResponse: HttpResponse = new HttpResponse()
-    ) { }
+    constructor() {
+        super();
+    }
 
     userValidator(req: Request, res: Response, next: NextFunction) {
 

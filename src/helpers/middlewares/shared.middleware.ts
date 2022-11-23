@@ -7,7 +7,7 @@ import { HttpResponse } from "../http.response";
 export class SharedMiddleware {
 
     constructor(
-        private readonly httpResponse: HttpResponse = new HttpResponse()
+        protected readonly httpResponse: HttpResponse = new HttpResponse()
     ) { }
 
     passAuth(type: string) { //Aqui recibo el nombre de cada strategy
@@ -19,7 +19,7 @@ export class SharedMiddleware {
         const user = req["user"] as UserEntity;
 
         if (user.role !== RoleType.ADMIN) {
-            return this.httpResponse.Unauthorized(res, "Unauthorizaed!");
+            return this.httpResponse.Unauthorized(res);
         }
         return next();
     }
